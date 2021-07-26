@@ -1,0 +1,29 @@
+.body {
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+    background: #1877f2;
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Likely future */
+    border-radius: 12.2px;
+    color: blanchedalmond;
+
+    background: url("https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/Nx08m0lmlH0.png");
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.body:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.body:active {
+    background: white;
+    color: gray;
+}

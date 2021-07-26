@@ -1,0 +1,14 @@
+.option{
+    margin-left: .5rem;
+    // display: flex;
+    // justify-content: center;
+    // margin:0 auto;
+    font-size: 1.3rem;
+    flex:1; 
+    border-radius: 50%;
+}
+
+.selected{
+    color:blue;
+    border-bottom: 5px solid blue;
+}
