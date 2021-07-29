@@ -1,0 +1,30 @@
+$lage: 966px;
+$tiny: 700px;
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    transition: 0.1s ease-in-out;
+    @media (min-width: $lage) {
+        margin: 0 auto;
+        width: 70%;
+        transition: 0.1s ease-in-out;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        flex: 2;
+    }
+    .mainContent {
+        flex: 3;
+        padding: 1rem;
+    }
+}

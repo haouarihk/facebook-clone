@@ -1,0 +1,31 @@
+.item {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #000;
+
+    transition: 0.1s ease-in-out;
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.item:hover {
+    border-radius: 10px;
+    background: rgba(40, 138, 218, 0.1);
+    cursor: pointer;
+}
+
+.active {
+    color: #1877f2;
+    border-bottom: 3px solid #1877f2;
+}
+.active:hover {
+    cursor: unset;
+    background: unset;
+    border-radius: 0;
+}
