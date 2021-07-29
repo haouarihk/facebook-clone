@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "lib": [
       "dom",
       "dom.iterable",
@@ -16,6 +16,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "jsx": "preserve"
   },
   "include": [
@@ -24,7 +28,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "server/**/*"
+    "node_modules"
   ]
 }
