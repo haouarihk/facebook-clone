@@ -17,8 +17,6 @@ export default function Posts({ uId, data }: { uId?: string, data?: any }) {
         <div className={styles.body}>
             {[...posts].reverse().map((post: any) => <>
                 <Post userId={uId as string} postId={post.pId} data={post} />
-                <Post userId={uId as string} postId={post.pId} data={post} />
-                <Post userId={uId as string} postId={post.pId} data={post} />
             </>)}
         </div>
     )
