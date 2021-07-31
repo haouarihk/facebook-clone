@@ -1,5 +1,7 @@
+import { useRouter } from 'next/dist/client/router';
 import React from 'react'
 import { useEffect } from 'react'
+import Posts from 'src/components/posts';
 import Head from 'src/components/profile/head';
 import Intro from 'src/components/profile/intro';
 import { getUser } from 'src/firebase/firestore'
@@ -13,18 +15,18 @@ export const defaultUser = {
 }
 
 
-export default function profileHead({ userData }: any) {
+export default function profileHead({ userData, uId }: { uId: string, userData?: any }) {
     const [user, setUser] = React.useState(userData || defaultUser)
     useEffect(() => {
+
         if (userData) return
-        // get id
-        const id = window.location.pathname.split('/')[2]
-        console.log('profile')
 
         // get user from firestore
-        getUser(id).then(setUser)
+        if (uId)
+            getUser(uId as string).then(setUser)
 
     }, []);
+    console.log(user);
     return (<div className={styles.body}>
         <Head userData={user} />
         <div className={styles.content}>
@@ -32,7 +34,9 @@ export default function profileHead({ userData }: any) {
             <div className={styles.sidebar}>
                 <Intro content={user.intro} />
             </div>
-            <div className={styles.mainContent}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum delectus, debitis placeat recusandae nihil autem soluta quos aliquid labore provident facere impedit consequatur libero reprehenderit officia a totam amet earum.</div>
+            <div className={styles.mainContent}>
+                <Posts uId={uId} />
+            </div>
         </div>
     </div>
     )
@@ -41,13 +45,13 @@ export default function profileHead({ userData }: any) {
 
 // This function gets called at build time
 export async function getServerSideProps(k: any) {
-    const { id } = k.query
+    const { uId } = k.query
     // Call an external API endpoint to get posts
     // get user from firestore
-    const userData = await getUser(id)
+    const userData = await getUser(uId)
     // Get the paths we want to pre-render based on posts
 
     // We'll pre-render only these paths at build time.
     // { fallback: false } means other routes should 404.
-    return { props: { user: userData } }
+    return { props: { user: userData, uId } }
 }

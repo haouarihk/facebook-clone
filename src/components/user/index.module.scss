@@ -1,0 +1,39 @@
+.body {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+}
+
+.avatar {
+    margin-right: 1rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    flex-grow: 1;
+}
+
+.ok {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-shrink: 1;
+
+    .name {
+        // bold
+        font-weight: bold;
+        margin-right: 0.5rem;
+    }
+    .stat {
+        // italic
+        font-style: italic;
+    }
+}
+.addition {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+}
