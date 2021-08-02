@@ -1,0 +1,16 @@
+.body {
+    display: flex;
+    padding-top: 1rem;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+}
+.button {
+    border: unset;
+}
+.button:hover {
+    border: unset;
+    background: rgba(0, 0, 0, 0.1);
+}

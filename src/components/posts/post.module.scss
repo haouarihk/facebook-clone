@@ -3,9 +3,10 @@
     flex-direction: column;
     justify-content: left;
 
-    padding: 2rem;
+    padding: 0.666rem;
     padding-top: 1rem;
     margin: 0.4rem;
+    margin-bottom: 1.333rem;
     margin-right: 0;
     width: 98%;
     background: white;
@@ -18,15 +19,16 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding-bottom: 1rem;
+    padding: 2rem;
+    padding-bottom: 0rem;
     padding-top: 0;
-
+    padding-right: 0;
     .user {
         flex-grow: 1;
     }
 }
 
-.settings {
+.stnBtn {
     padding: 0.6rem;
     display: flex;
     align-items: center;
@@ -36,8 +38,7 @@
         margin: 0 auto;
     }
 }
-
-.settings:hover {
+.stnBtn:hover {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     cursor: pointer;
@@ -46,4 +47,61 @@
 .content {
     min-width: 10px;
     font-size: 1.6rem;
+    margin-bottom: 0.333rem;
+    padding: 2rem;
+    padding-top: 0.5555rem;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+
+    .bottons {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 2rem;
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        font-size: 16px;
+        border-top: 2px solid rgba(0, 0, 0, 0.09);
+        transition: 0.5s ease-out;
+        .button {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex: 1;
+            padding: 0.555rem;
+            * {
+                margin-right: 0.4rem;
+            }
+            :hover {
+                background: none;
+                transition: none;
+            }
+        }
+        :hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            font-size: 16.2px;
+            letter-spacing: 0.22rem;
+            transition: 0.2s ease-out;
+            cursor: pointer;
+
+            * {
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+    .comments {
+        margin: 2rem;
+        margin-top: 0.2rem;
+        border-top: 2px solid rgba(0, 0, 0, 0.227);
+        padding-bottom: 0rem;
+        padding-top: 0;
+    }
 }

@@ -1,4 +1,4 @@
-import "../d/globals"
+
 
 import styles from '../styles/Home.module.scss'
 
