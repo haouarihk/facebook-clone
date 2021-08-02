@@ -8,7 +8,6 @@ Project Description
 
 - [ ] make the login page  
 - [ ] start with likes  
-- [ ] implement New post  
 - [ ] setup the backend  
 
 ### In Progress
@@ -16,4 +15,5 @@ Project Description
 
 ### Done ✓
 
+- [x] implement New post  
 
