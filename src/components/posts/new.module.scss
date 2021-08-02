@@ -14,3 +14,31 @@
     transition: 0.2s ease-out;
     cursor: pointer;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: 0.4rem;
+    padding-top: 0rem;
+    .textarea {
+        flex: 5;
+        height: 100%;
+        width: 100%;
+        resize: none;
+        border: none;
+        font-size: 1.9rem;
+    }
+    .textarea:focus {
+        outline: none;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        //padding-left: 0.3rem;
+    }
+}
