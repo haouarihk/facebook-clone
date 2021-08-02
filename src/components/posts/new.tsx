@@ -24,6 +24,7 @@ export function NewPost({ userId, end }: { userId: string, end: Function }) {
     const [showButton, setShowButton] = React.useState(false);
     const taRef = useRef();
     useEffect(() => {
+        // @ts-ignore
         taRef?.current?.focus();
     }, []);
 
