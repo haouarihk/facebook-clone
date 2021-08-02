@@ -22,9 +22,8 @@ function decay(arr: string[]) {
 export function NewPost({ userId, end }: { userId: string, end: Function }) {
     const [content, setContent] = React.useState('');
     const [showButton, setShowButton] = React.useState(false);
-    const taRef = useRef();
+    const taRef = useRef<any>();
     useEffect(() => {
-        // @ts-ignore
         taRef?.current?.focus();
     }, []);
 
