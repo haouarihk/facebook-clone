@@ -6,12 +6,12 @@ Project Description
 
 ### Todo
 
-- [ ] make the login page  
 - [ ] start with likes  
 - [ ] setup the backend  
 
 ### In Progress
 
+- [ ] make the login page  
 
 ### Done ✓
 

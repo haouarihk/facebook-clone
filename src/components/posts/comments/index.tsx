@@ -1,9 +1,9 @@
 
 import React, { useEffect } from 'react'
-import { getComments, getCommentsWatcher } from 'src/firebase/firestore';
 import styles from "./index.module.scss"
 import Comment, { CommentProps } from "./comment"
 import New from './new';
+import { FComments } from 'src/firebase/firestore';
 
 
 
@@ -17,7 +17,7 @@ export default function Comments({ userId, postId, data }: { userId?: string, po
 
         if (userId && postId) {
             //   getComments(userId, postId).then(setComments);
-            getCommentsWatcher(userId, postId).orderBy("timestamp", "asc").onSnapshot(snapshots => {
+            FComments.getCommentsWatcher(userId, postId).orderBy("timestamp", "asc").onSnapshot(snapshots => {
                 setComments(snapshots.docs.map(doc => ({ id: doc.id, postId, ...doc.data() } as CommentProps)
                 ));
             })

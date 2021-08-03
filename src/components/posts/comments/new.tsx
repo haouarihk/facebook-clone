@@ -2,7 +2,8 @@ import { Input, OutlinedInput } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import React from 'react'
 import User from 'src/components/user'
-import { PutComment } from 'src/firebase/firestore'
+import { FComments } from 'src/firebase/firestore'
+
 import styles from "./new.module.scss"
 export default function New({ userId, postId }: { userId?: string, postId?: string }) {
     const [content, setContent] = React.useState<string>("");
@@ -15,7 +16,7 @@ export default function New({ userId, postId }: { userId?: string, postId?: stri
 
         setEnabled(false);
         // create new comment
-        if (userId && postId) await PutComment(userId, postId, { content });
+        if (userId && postId) await FComments.PutComment(userId, postId, { content });
 
         setContent("");
 

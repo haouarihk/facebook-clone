@@ -1,12 +1,14 @@
 import { Comment, MoreHoriz, Public, ThumbUp } from '@material-ui/icons';
 import React, { useEffect } from 'react'
-import { getPost, RemovePost } from 'src/firebase/firestore';
+import { FPosts } from 'src/firebase/firestore';
 import User from '../user';
 import ItemList from '../utils/itemList';
 import Comments from './comments';
 import styles from "./post.module.scss";
 
 export interface PostData {
+    id: string;
+    userId: string;
     content: string;
     isPublic: boolean;
     timestamp: Date;
@@ -14,6 +16,8 @@ export interface PostData {
 
 
 export const defaultPost = {
+    id: "",
+    userId: "",
     content: " ",
     isPublic: true,
     timestamp: new Date()
@@ -25,14 +29,17 @@ export default function Post({ userId, postId, data }: { userId: string, postId:
 
 
     const [viewOptions, setViewOptions] = React.useState(false);
-    const rmP = (_: any) => {
-        RemovePost(userId, postId)
+
+    const rmP = async (_: any) => {
+        console.log(userId, postId)
+        await FPosts.RemovePost(userId, postId).catch(console.log)
+        setViewOptions(false)
     }
 
 
     useEffect(() => {
         if (data) return
-        getPost(userId, postId).then(setPost);
+        FPosts.getPost(userId, postId).then(setPost);
 
     }, [])
 

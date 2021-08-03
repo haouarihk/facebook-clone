@@ -1,7 +1,6 @@
 import { Button, TextareaAutosize } from '@material-ui/core';
-import { ExitToApp } from '@material-ui/icons';
 import React, { useEffect, useRef } from 'react'
-import { PutPost } from 'src/firebase/firestore';
+import { FPosts } from 'src/firebase/firestore';
 import User from '../user';
 import OverlayMessage from '../utils/overlayMessage';
 import styles from "./new.module.scss";
@@ -39,7 +38,7 @@ export function NewPost({ userId, end }: { userId: string, end: Function }) {
         if (decay(content.split(' ')).length <= 0) return;
 
         setShowButton(false);
-        await PutPost(userId as string, { content }).catch(alert);
+        await FPosts.PutPost(userId as string, { content }).catch(alert);
         end();
     }
 

@@ -2,7 +2,8 @@ import { MoreHoriz } from '@material-ui/icons';
 import React, { useState } from 'react'
 import User from 'src/components/user'
 import ItemList from 'src/components/utils/itemList';
-import { RemoveComment } from 'src/firebase/firestore';
+import { FComments } from 'src/firebase/firestore';
+
 import styles from "./comment.module.scss";
 
 export interface CommentProps {
@@ -16,7 +17,7 @@ export interface CommentProps {
 export default function comment({ data }: { data: CommentProps }) {
     const [viewOptions, setViewOptions] = useState(false);
     const rmC = (_: any) => {
-        RemoveComment(data.userId, data.postId, data.id)
+        FComments.RemoveComment(data.userId, data.postId, data.id)
     }
     return (
         <div className={styles.body}
