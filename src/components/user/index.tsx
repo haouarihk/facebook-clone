@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core'
 import { Public } from '@material-ui/icons'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { UsersCacheContext } from 'src/contexts/usersCacheProvider'
 import { getUser } from 'src/firebase/firestore'
 import styles from "./index.module.scss"
 
@@ -10,11 +11,17 @@ const defaultUser = {
 }
 
 export default function User({ userId, data, stats, onlyAvatar }: { userId?: string, data?: any, stats?: { hm?: string, stat?: string, isPublic?: boolean }, onlyAvatar?: boolean }) {
-    const [user, setUser] = React.useState(data || defaultUser)
+    const { users, updateUser } = useContext(UsersCacheContext)
+    const [user, setUser] = React.useState(data || defaultUser);
     useEffect(() => {
         if (data) return
-        if (userId)
-            getUser(userId).then(setUser)
+        if (!userId) return console.error("User id is required")
+
+        if (users[userId])
+            return setUser(users[userId]);
+
+
+        getUser(userId).then(setUser)
     }, [])
 
 

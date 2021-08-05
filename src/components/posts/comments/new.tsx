@@ -2,6 +2,7 @@ import { Input, OutlinedInput } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import React from 'react'
 import User from 'src/components/user'
+import { decay2 } from 'src/components/utils/spamProtection'
 import { FComments } from 'src/firebase/firestore'
 
 import styles from "./new.module.scss"
@@ -11,7 +12,7 @@ export default function New({ userId, postId }: { userId?: string, postId?: stri
     const sub = async (e: any) => {
         e.preventDefault();
 
-        if (content.split(` `).length == 0) return;
+        if (decay2(content)) return;
 
 
         setEnabled(false);

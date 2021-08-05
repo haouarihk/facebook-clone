@@ -1,5 +1,5 @@
 import React from "react";
-
+import Img from "next/image";
 import styles from "./index.module.scss";
 import { useEffect } from "react";
 import Item from "./item";

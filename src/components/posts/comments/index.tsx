@@ -11,13 +11,13 @@ export default function Comments({ userId, postId, data }: { userId?: string, po
     const [comments, setComments] = React.useState<CommentProps[]>(data || []);
     const [viewed, setViewed] = React.useState(false);
     const [viewedContent, setViewedContent] = React.useState(data || []);
-
-    useEffect(() => {
+    // @ts-ignore
+    useEffect(async () => {
         if (data) return;
 
         if (userId && postId) {
             //   getComments(userId, postId).then(setComments);
-            FComments.getCommentsWatcher(userId, postId).orderBy("timestamp", "asc").onSnapshot(snapshots => {
+            (await FComments.getCommentsWatcher(userId, postId))(snapshots => {
                 setComments(snapshots.docs.map(doc => ({ id: doc.id, postId, ...doc.data() } as CommentProps)
                 ));
             })

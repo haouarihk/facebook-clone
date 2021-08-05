@@ -9,13 +9,13 @@ export default function Posts({ uId, data }: { uId?: string, data?: PostData[] }
     const [posts, setPosts] = React.useState<PostData[]>([]);
     const [viewed, setViewed] = React.useState(false);
     const [viewedContent, setViewedContent] = React.useState<PostData[]>(data || []);
-
-    useEffect(() => {
+    //@ts-ignore
+    useEffect(async () => {
         if (data) return;
 
         // get Posts
         if (uId) {
-            FPosts.getPostsWatcher(uId).orderBy("timestamp", "asc").onSnapshot(snapshots => {
+            (await FPosts.getPostsWatcher(uId))(snapshots => {
                 setPosts(snapshots.docs.map(doc => ({ id: doc.id, ...doc.data() } as PostData)
                 ));
             })
@@ -33,11 +33,13 @@ export default function Posts({ uId, data }: { uId?: string, data?: PostData[] }
     return (
         <div className={styles.body}>
             <New userId={uId as string} />
-            {
-                viewedContent.map((post: PostData) => <>
-                    <Post key={JSON.stringify(post)} userId={uId as string} postId={post.id} data={post} />
+            {viewedContent[0] &&
+                viewedContent.map((_post: PostData) => <>
+                    {/* @ts-ignore */}
+                    {<Post key={_post.id + Math.random()} userId={uId as string} postId={_post.id} data={_post} />}
                 </>)
             }
+
             {!viewed && posts.length > 8 && <div className={styles.viewMore}
                 onClick={_ => setViewed(true)}
             >view more ({posts.length - viewedContent.length})</div>}

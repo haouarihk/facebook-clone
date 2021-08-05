@@ -14,7 +14,7 @@ export interface CommentProps {
     likes?: number
 }
 
-export default function comment({ data }: { data: CommentProps }) {
+export default function Comment({ data }: { data: CommentProps }) {
     const [viewOptions, setViewOptions] = useState(false);
     const rmC = (_: any) => {
         FComments.RemoveComment(data.userId, data.postId, data.id)

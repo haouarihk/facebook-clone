@@ -3,20 +3,13 @@ import React, { useEffect, useRef } from 'react'
 import { FPosts } from 'src/firebase/firestore';
 import User from '../user';
 import OverlayMessage from '../utils/overlayMessage';
+import { decay2 } from '../utils/spamProtection';
 import styles from "./new.module.scss";
 import stylesPost from "./post.module.scss";
 
 
-function decay(arr: string[]) {
-    const _arr = [...arr];
-    for (let i = 0; i < _arr.length; i++) {
-        if (_arr[i].replace(/\n/gi, "") == "") {
-            _arr.splice(i, 1);
-            i--;
-        }
-    }
-    return _arr;
-}
+
+
 
 export function NewPost({ userId, end }: { userId: string, end: Function }) {
     const [content, setContent] = React.useState('');
@@ -28,14 +21,14 @@ export function NewPost({ userId, end }: { userId: string, end: Function }) {
 
 
     useEffect(() => {
-        if (decay(content.split(' ')).length > 0)
-            setShowButton(true);
-        else
+        if (decay2(content))
             setShowButton(false);
+        else
+            setShowButton(true);
     }, [content]);
 
     const onSubmit = async (_: any) => {
-        if (decay(content.split(' ')).length <= 0) return;
+        if (decay2(content)) return;
 
         setShowButton(false);
         await FPosts.PutPost(userId as string, { content }).catch(alert);

@@ -15,7 +15,7 @@ export const defaultUser = {
 }
 
 
-export default function profileHead({ userData, uId }: { uId: string, userData?: any }) {
+export default function ProfileHead({ userData, uId }: { uId: string, userData?: any }) {
     const [user, setUser] = React.useState(userData || defaultUser)
     useEffect(() => {
 
