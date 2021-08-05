@@ -10,7 +10,7 @@ import { FComments } from 'src/firebase/firestore';
 export default function Comments({ userId, postId, data }: { userId?: string, postId?: string, data?: CommentProps[] }) {
     const [comments, setComments] = React.useState<CommentProps[]>(data || []);
     const [viewed, setViewed] = React.useState(false);
-    const [viewedContent, setViewedContent] = React.useState(data || []);
+    const [viewedContent, setViewedContent] = React.useState<CommentProps[]>([]);
     // @ts-ignore
     useEffect(async () => {
         if (data) return;

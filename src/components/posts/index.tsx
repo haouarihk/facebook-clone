@@ -6,9 +6,9 @@ import Post, { PostData } from './post';
 
 
 export default function Posts({ uId, data }: { uId?: string, data?: PostData[] }) {
-    const [posts, setPosts] = React.useState<PostData[]>([]);
+    const [posts, setPosts] = React.useState<PostData[]>(data || []);
     const [viewed, setViewed] = React.useState(false);
-    const [viewedContent, setViewedContent] = React.useState<PostData[]>(data || []);
+    const [viewedContent, setViewedContent] = React.useState<PostData[]>([]);
     //@ts-ignore
     useEffect(async () => {
         if (data) return;
@@ -29,16 +29,11 @@ export default function Posts({ uId, data }: { uId?: string, data?: PostData[] }
             setViewedContent([...posts].reverse().slice(0, 8));
         }
     }, [posts, viewed])
-    console.log(viewedContent)
     return (
         <div className={styles.body}>
             <New userId={uId as string} />
-            {viewedContent[0] &&
-                viewedContent.map((_post: PostData) => <>
-                    {/* @ts-ignore */}
-                    {<Post key={_post.id + Math.random()} userId={uId as string} postId={_post.id} data={_post} />}
-                </>)
-            }
+            {viewedContent.map((_post: PostData) => <Post key={_post.id} userId={uId as string} postId={_post.id} data={_post} />
+            )}
 
             {!viewed && posts.length > 8 && <div className={styles.viewMore}
                 onClick={_ => setViewed(true)}

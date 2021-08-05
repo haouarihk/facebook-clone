@@ -23,8 +23,7 @@ export const defaultPost = {
     timestamp: new Date()
 }
 
-export default function Post({ userId, postId, data, key }: { userId: string, postId: string, data?: PostData, key?: string }) {
-    console.log("key", key)
+export default function Post({ userId, postId, data }: { userId: string, postId: string, data?: PostData }) {
     const [post, setPost] = React.useState<PostData>(data || defaultPost);
     const [viewComments, setViewComments] = React.useState<boolean>(false);
 
