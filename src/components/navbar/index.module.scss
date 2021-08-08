@@ -1,0 +1,22 @@
+.body {
+    display: flex;
+    position: fixed;
+    background: white;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 24px;
+}
+.sum {
+    display: flex;
+    width: 100%;
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}

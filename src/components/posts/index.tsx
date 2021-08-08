@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FPosts, getUserPosts } from 'src/firebase/firestore';
+import { FPosts, FUser } from 'src/firebase/firestore';
 import styles from "./index.module.scss";
 import New from './new';
 import Post, { PostData } from './post';

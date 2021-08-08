@@ -5,9 +5,11 @@ import "src/firebase"
 import React from 'react'
 import UserProvider from 'src/contexts/userProvider'
 import UsersCacheProvider from 'src/contexts/usersCacheProvider'
+import Navbar from 'src/components/navbar'
 function MyApp({ Component, pageProps }: AppProps) {
   return <UserProvider>
     <UsersCacheProvider>
+      <Navbar />
       <Component {...pageProps} />
     </UsersCacheProvider>
   </UserProvider>

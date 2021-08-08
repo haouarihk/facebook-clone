@@ -1,16 +1,17 @@
 import { createContext, useState } from "react";
+import { FUser } from "src/firebase/firestore";
 
 /* types */
 export interface cacheProviderProps {
     users: any;
-    updateUser: ((userId: string, userData: any) => void);
+    updateUser: (userId: string) => Promise<any>;
 }
 
 /* default values*/
 
 const contextDefaultValues: cacheProviderProps = {
     users: {},
-    updateUser: () => console.error("EH NOT User Provider Not Inisialized")
+    updateUser: async (_: string) => console.error("EH NOT User Provider Not Inisialized")
 };
 
 /* user Context */
@@ -23,8 +24,13 @@ export default function UsersCacheProvider({ children }: any) {
     const [users, setUsers] = useState<any | null>(contextDefaultValues.users);
 
 
-    const updateUser = (userId: string, userData: any) => {
-        setUsers((usr: any) => ({ ...usr, [userId]: userData }))
+    const updateUser: (userId: string) => Promise<any> = (userId: string) => {
+        return new Promise(async (solve, reject) => {
+            FUser.getUser(userId).then((userData: any) => {
+                setUsers((usr: any) => ({ ...usr, [userId]: userData }));
+                solve(userData as any);
+            }).catch(reject);
+        });
     }
 
     return (

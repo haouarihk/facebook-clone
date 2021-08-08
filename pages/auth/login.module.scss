@@ -42,6 +42,7 @@ $huge: 1220px;
     flex: 4;
     width: 100%;
     height: 100%;
+    min-height: 30rem;
 }
 
 .head {
@@ -70,6 +71,7 @@ $huge: 1220px;
 }
 
 .login {
+    text-align: center;
     justify-content: space-evenly;
 
     padding: 5rem;
@@ -77,7 +79,8 @@ $huge: 1220px;
     padding-top: 2rem;
     padding-bottom: 2rem;
     @media (min-width: $l) {
-        padding: 1rem;
+        padding: 0rem;
+
         padding-top: 10rem;
         padding-bottom: 5rem;
     }
@@ -126,7 +129,10 @@ $huge: 1220px;
         cursor: pointer;
     }
 
-    border-radius: 25px;
+    @media (min-width: $l) {
+        border-radius: 25px;
+    }
+    border-radius: 0px;
     box-shadow: 0 0.1px 1rem 1px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.45rem;
 }

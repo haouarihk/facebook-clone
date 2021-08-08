@@ -9,7 +9,8 @@ import {
     addDoc,
     serverTimestamp,
     deleteDoc,
-    CollectionReference
+    CollectionReference,
+    setDoc
 } from "firebase/firestore";
 import { PostData } from "src/components/posts/post";
 
@@ -21,13 +22,31 @@ import {
 
 const authed = auth.getAuth(firebaseApp)
 const fs = firestore.getFirestore(firebaseApp);
-export async function getUser(id: string) {
-    // get user form firestore
-    const docRef = doc(fs, "users", id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) return docSnap.data()
-    else return null
+
+export namespace FUser {
+    export async function getUser(id: string) {
+        // get user form firestore
+        const docRef = doc(fs, "users", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) return docSnap.data()
+        else return null
+    }
+
+    export async function setUser(id: string, data: any) {
+        // get user form firestore
+        const docRef = doc(fs, "users", id);
+        await setDoc(docRef, data);
+    }
+
+
+    export async function getUserPosts(uId: string): Promise<any> {
+        // get post form firestore
+        const collRef = collection(fs, 'users', uId, 'posts');
+        return getDocs(collRef).then(k => k.docs.map(b => b.data()))
+    }
 }
+
+
 
 const kSnapShot = (collRef: CollectionReference<DocumentData>) => {
     return (cb: ((snapShot: QuerySnapshot<DocumentData>) => void)) => onSnapshot(collRef, cb)
@@ -49,12 +68,14 @@ export namespace FPosts {
         return kSnapShot(collRef)
     }
 
-    export function PutPost(uId: string, data: { content: string }) {
+    export async function PutPost(uId: string, data: { content: string }) {
+        if (!authed.currentUser?.uid) return { message: "No user is logged in" }
+
         // put post to firestore
         const collRef = collection(fs, 'users', uId, 'posts');
         return addDoc(collRef, {
             ...data, timestamp: serverTimestamp(),
-            userId: "hello"//auth.currentUser?.uid
+            userId: authed.currentUser?.uid
         })
 
     }
@@ -81,11 +102,13 @@ export namespace FComments {
 
 
     export function PutComment(uId: string, pId: string, data: { content: string }) {
+        if (!authed.currentUser?.uid) return { message: "No user is logged in" }
+
         // put comment to firestore
         const collRef = collection(fs, 'users', uId, 'posts', pId, 'comments');
         addDoc(collRef, {
             ...data, timestamp: serverTimestamp(),
-            userId: "hello"//auth.currentUser?.uid
+            userId: authed.currentUser?.uid
         })
     }
     export function RemoveComment(uId: string, pId: string, cId: string) {
@@ -95,10 +118,3 @@ export namespace FComments {
 
 }
 
-
-
-export async function getUserPosts(uId: string): Promise<any> {
-    // get post form firestore
-    const collRef = collection(fs, 'users', uId, 'posts');
-    return getDocs(collRef).then(k => k.docs.map(b => b.data()))
-}

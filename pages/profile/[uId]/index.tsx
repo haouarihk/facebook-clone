@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Posts from 'src/components/posts';
 import Head from 'src/components/profile/head';
 import Intro from 'src/components/profile/intro';
-import { getUser } from 'src/firebase/firestore'
+import { FUser } from 'src/firebase/firestore'
 import styles from "./index.module.scss"
 
 export const defaultUser = {
@@ -23,7 +23,7 @@ export default function ProfileHead({ userData, uId }: { uId: string, userData?:
 
         // get user from firestore
         if (uId)
-            getUser(uId as string).then(setUser)
+            FUser.getUser(uId as string).then(setUser)
 
     }, []);
     console.log(user);
@@ -48,7 +48,7 @@ export async function getServerSideProps(k: any) {
     const { uId } = k.query
     // Call an external API endpoint to get posts
     // get user from firestore
-    const userData = await getUser(uId)
+    const userData = await FUser.getUser(uId)
     // Get the paths we want to pre-render based on posts
 
     // We'll pre-render only these paths at build time.
