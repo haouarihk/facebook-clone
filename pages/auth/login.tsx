@@ -49,7 +49,6 @@ export default function Login() {
 
 
     useEffect(() => {
-        console.log(user)
         if (user) history.back();
     }, [user]);
 

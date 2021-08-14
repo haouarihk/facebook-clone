@@ -29,10 +29,11 @@ export default function Posts({ uId, data }: { uId?: string, data?: PostData[] }
             setViewedContent([...posts].reverse().slice(0, 8));
         }
     }, [posts, viewed])
+
     return (
         <div className={styles.body}>
             <New userId={uId as string} />
-            {viewedContent.map((_post: PostData) => <Post key={_post.id} userId={uId as string} postId={_post.id} data={_post} />
+            {viewedContent.map((_post: PostData) => <Post key={_post.userId + _post.id} userId={_post.userId as string} postId={_post.id} data={_post} />
             )}
 
             {!viewed && posts.length > 8 && <div className={styles.viewMore}

@@ -62,6 +62,14 @@ export namespace FPosts {
         else return Promise.reject(null)
     }
 
+
+    export async function getPosts(uId: string) {
+        // get comments from post form firestore
+        const collRef = collection(fs, 'users', uId, 'posts')
+        const docSnap = await getDocs(collRef)
+        return docSnap.docs.map(a => ({ id: a.id, ...a.data() }) as PostData)
+    }
+
     export async function getPostsWatcher(uId: string) {
         // get comments from post form firestore
         const collRef = collection(fs, 'users', uId, 'posts')

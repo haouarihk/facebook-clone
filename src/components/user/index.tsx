@@ -47,6 +47,7 @@ export default function User({ userId, data, stats, onlyAvatar }: { userId?: str
 
     }, [me.user, userId])
 
+    const addition = `${stats ? stats.hm ? stats.hm : "" : ""} ${stats?.isPublic ? <Public /> : ""}`
 
     return (user ? <div className={styles.body}>
         <div className={styles.avatar}>
@@ -58,8 +59,8 @@ export default function User({ userId, data, stats, onlyAvatar }: { userId?: str
                     <div className={styles.name}>{user.name || user.displayName}</div>
                     <div className={styles.stat}>{stats ? stats.stat ? stats.stat : "" : ""}</div>
                 </div>
-
-                <div className={styles.addition}>{stats ? stats.hm ? stats.hm : "" : ""} {stats?.isPublic ? <Public /> : ""}</div>
+                {addition != " " &&
+                    <div className={styles.addition}>{addition}</div>}
             </div>
         }
     </div>
